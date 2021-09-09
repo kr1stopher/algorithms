@@ -47,6 +47,19 @@ bool isUnique2 (string myString)
 
 
 
+//Implement a function void reverse(char* str) in C or C++ which reverses a null-terminated string.
+string reverseString(string str)
+{
+  int i = 0;
+  string revString (1, str[str.length()-1]);
+  ++i;
+  while (i < str.length())
+  {
+    revString = revString + str[str.length()-1-i];
+    ++i;
+  }
+  return revString;
+}
 
 
 int main()
@@ -54,6 +67,7 @@ int main()
   string myString = "potato";
   isUnique(myString) ? cout<<"The string is unique"<<endl : cout<<"The String is not unique"<<endl;
   isUnique2(myString) ? cout<<"The string is unique"<<endl : cout<<"The String is not unique"<<endl;
+  cout<<reverseString(myString)<<" This is the reverse of myString"<<endl;
 
 
 }
