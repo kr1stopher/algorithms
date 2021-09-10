@@ -8,7 +8,7 @@
 
 using namespace std;
 
-//function for not using any other data structures:
+//function for not using any other data structures: check to see if a string is all unique characters
 bool isUnique (string myString){
   int i = 0;
   while (i<myString.length()){
@@ -53,6 +53,8 @@ string reverseString(string str)
   int i = 0;
   string revString (1, str[str.length()-1]);
   ++i;
+
+  //add str to reverse strings characters one by one, starting at end
   while (i < str.length())
   {
     revString = revString + str[str.length()-1-i];
@@ -61,31 +63,24 @@ string reverseString(string str)
   return revString;
 }
 
-
+//checks to see if a string is a permutation of another string max O(n^2) time
+//allows for str2 to be  a substring of str1
 bool isPermutation(string str1, string str2){
   for (int i = 0; i<str1.length();i++){
     bool isFound = false;
     for (int j=0; j<str2.length();j++){
       if (str2[j]==str1[i]){
-        cout<<" j is "<<j<<endl;
         isFound == true;
-        //j = str2.length();
-        str1.erase(i,1);
-        cout<<str1<<endl;
-        cout<<"about to break"<<endl;
-        //break;
       }
       if (j == str2.length()-1 && isFound == false){
-      cout<<"im in here"<<endl;
         return false;
       }
     }
   }
   return true;
 }
-//checks to see if a string is a permutation of another string max O(n^2) time
-//allows for str2 to be  a substring of str1
 
+//check to see if str1 and str2 are permutations of one another (same characters rearranged, same length )
 bool arePermutation(string str1, string str2)
 {
     int count[256] = {0}; //256 == NO_OF_CHARS?
@@ -113,11 +108,11 @@ bool arePermutation(string str1, string str2)
 //alg to replace  ' ' characters with "%20" in O(n) time
 string replaceSpace(string str)
 {
-  for (int i = 0; i<str.length(); i++)
+  for (int i = 0; i<str.length(); i++) //cycle through string
   {
-    if (str[i]==' ')
+    if (str[i]==' ') //find spaces
     {
-      str = str.substr(0,i) + "%20" + str.substr(i+1, str.length()-1-i);
+      str = str.substr(0,i) + "%20" + str.substr(i+1, str.length()-1-i);  //replace spaces with "%20" through concatentation
     }
   }
   return str;
@@ -156,17 +151,61 @@ inal string, your method should return the original string.
 */
 string compressedString(string str){
   int i = 0;
-  count = 0;
+  int count = 0;
   string compressedString;
 
   while (i<str.length()){
-    int j = i;
-    while (str[i] == string[j]){
+    int j = i+1;
+    while (str[j] && str[i] == str[j]){ //move through string until no longer finding the same character
       ++j;
     }
-    compressedString += 
+    compressedString += str[i] + to_string(j-i);  //replace all characters with a single character and number of occurrences (aaaa becomes a4) through concatenation 
+    i = j;
   }
+  return compressedString;
 }
+//O(n) time
+
+//Write an algorithm such that if an element in an MxN matrix is 0, its entire row and column are set to 0
+
+/*
+int matrix0 (int matrix[][4]) {
+  int rows = sizeof(matrix)/sizeof(matrix[0]);
+  int cols = sizeof(matrix[0])/sizeof(int);
+  int row0[rows] = {0};
+  int col0[cols] = {0};
+
+  for (int i = 0; i<rows; i++){
+    for (int j = 0; j<cols; j++){
+      if (matrix[i][j] == 0){
+        row0[i] = 1;
+        col0[j] = 1;
+      }
+    }
+  }
+
+  for (int i = 0; i<rows;i++){
+    if (row0[i] == 1){
+      for (int j = 0; i<cols; j++){
+        matrix0[i][j] = 0;
+      }
+    }
+
+  }
+
+  for (int j = 0; j<cols;j++){
+    if (col0[i] == 1){
+      for (int i = 0; i<rows; i++){
+        matrix0[i][j] = 0;
+      }
+    }
+  }
+
+  return matrix0;
+
+}
+*/
+
 
 
 int main()
@@ -178,7 +217,11 @@ int main()
   isPermutation("mystring", "mmystring") ? cout<<" One string is a permutation of the other"<<endl : cout<<"One string is not a permutation of the  other"<<endl;
   cout<<arePermutation("mystring","mtring")<<endl;
   cout<<replaceSpace("Hello there general kenobi")<<endl;
-  cout<<compression("fffeeeaaabb");
+  cout<<charCount("fffeeeaaabb");
+  cout<<compressedString("aaabbbcccddd");
 
+  int matrix1[] = {0, 1, 1, 1}
+  int matrix2[] = {matrix1, matrix1, matrix1, matrix1}
+  cout<<matrix0(matrix2)
 
 }
