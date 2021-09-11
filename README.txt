@@ -11,5 +11,8 @@ uniqueStirngs.cpp
 	(8) compressed string: compresses a string based on its charaters
 	(9) Write an algorithm such that if an element in an MxN matrix is 0, its entire row and column are set to 0
 	
+linkedlistAlgs.cpp
+	(1) node1 and updated node class for linked list operation 
+	
 	
 
