@@ -99,6 +99,13 @@ int  kthElement (int k, node n) {
   return elements[elements.size()-k];
 }
 
+//given only a node, delete that node from the linked list
+void  deleteNode (node n){
+  n.data = n.next->data;
+  n.next = n.next->next;
+}
+//note: cannot be the final node in the list
+
 int main(){
 
   //create a linked list using the node class for testing algs

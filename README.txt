@@ -15,6 +15,8 @@ linkedlistAlgs.cpp
 	(1) node1 and updated node class for linked list operation 
 	(2) write a function to remove duplicates from linked list
 	(3) return the kth to last element of a linked list 
+	(4) given a node and only a node, remove it from the list 
+	
 	
 	
 
