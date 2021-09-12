@@ -13,6 +13,7 @@ uniqueStirngs.cpp
 	
 linkedlistAlgs.cpp
 	(1) node1 and updated node class for linked list operation 
+	(2) write a function to remove duplicates from linked list
 	
 	
 
