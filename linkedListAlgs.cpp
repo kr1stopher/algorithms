@@ -32,7 +32,7 @@ public:
     int i = 0;
     node* n = this;
     while (n != nullptr){
-      cout<<n->data<<"This is node: "<<i<<endl;
+      printf("Node %d contains data %d \n",i,n->data);
       n = n->next;
       ++i;
     }
@@ -106,6 +106,44 @@ void  deleteNode (node n){
 }
 //note: cannot be the final node in the list
 
+/*
+You have two numbers represented by a linked list, where each node contains a
+single digit. The digits are stored in reverse order, such that the Ts digit is at the
+head of the list. Write a function that adds the two numbers and returns the sum
+as a linked list.
+EXAMPLE
+Input: (7-> 1 -> 6) + (5 -> 9 -> 2).That is, 617 + 295.
+Output: 2 -> 1 -> 9.That is, 912.
+*/
+
+node magicAddition(node n){
+  vector<int> numbers;
+  node *m  = & n;
+
+  //store the  data from the  linked list in numbers
+  while (m!=nullptr){
+    numbers.push_back(m->data);
+    m=m->next;
+  }
+
+  //assemble the numbers in proper orderr, convert to int for addition, convert back to string
+  int ans = stoi(to_string(numbers[2]) + to_string(numbers[1]) + to_string(numbers[0])) + stoi(to_string(numbers[5]) + to_string(numbers[4]) + to_string(numbers[3]));
+  string ansString = to_string(ans);
+
+  //create linked list of answer starting with the ones digit
+  node nodeOne = node(ansString[ansString.length()-1] - '0');
+  nodeOne.printList();
+  for (int i = 1; i<ansString.length(); i++){
+    nodeOne.appendNode(ansString[ansString.length()-i-1] - '0');
+  }
+
+  //return initial node to linked list
+  return nodeOne;
+}
+//way to improve: rather than conveting to string to index use modulo %
+
+
+
 int main(){
 
   //create a linked list using the node class for testing algs
@@ -122,6 +160,15 @@ int main(){
   cout<<"Below is the list with duplicates removed"<<endl;
   node1.printList();
   cout<<"2nd ot last element is "<<kthElement(2,node1)<<endl;
+
+  node nodeAddition = node(7);
+  int a1[] = {1,6,5,9,2};
+  for (int i = 0;i< sizeof(a)/sizeof(a1[0]); i++){
+    nodeAddition.appendNode(a1[i]);
+  }
+  node answer = magicAddition(nodeAddition);
+  cout<<"Below is the magic addition answer"<<endl;
+  answer.printList();
 
 
 }
