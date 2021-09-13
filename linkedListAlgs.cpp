@@ -5,6 +5,7 @@
 #include <stdio.h>
 #include <cstddef>
 #include <vector>
+#include <cmath>
 
 
 using namespace std;
@@ -116,7 +117,7 @@ Input: (7-> 1 -> 6) + (5 -> 9 -> 2).That is, 617 + 295.
 Output: 2 -> 1 -> 9.That is, 912.
 */
 
-node magicAddition(node n){
+node magicAddition2(node n){
   vector<int> numbers;
   node *m  = & n;
 
@@ -141,7 +142,24 @@ node magicAddition(node n){
   return nodeOne;
 }
 //way to improve: rather than conveting to string to index use modulo %
+//better immprovement: multiple by 1, 10, 100, & add
 
+//improved magicAddition using floor and % instead of to_string and stoi
+node magicAddition(node n){
+  vector<int> numbers; //for storing the values in the linked list
+  node *m  = & n;
+  while (m!=nullptr){   //store the  data from the  linked list in numbers
+    numbers.push_back(m->data);
+    m=m->next;
+  }
+
+  //assemble the numbers in proper orderr, convert to int for addition, convert back to string
+  int ans = numbers[2]*100 + numbers[1]*10 + numbers[0]*1 + numbers[5]*100 + numbers[4]*10 + numbers[3]*1;
+  node nodeOne = node(ans%10/1);
+  nodeOne.appendNode(floor((ans%100)/10));
+  nodeOne.appendNode(floor((ans%1000)/100));
+  return nodeOne;
+}
 
 
 int main(){
