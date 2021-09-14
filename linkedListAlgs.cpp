@@ -191,8 +191,8 @@ node* detectLoop(node n){
 
 //check to see if a linked list  is a palindrome
 bool isPalindrome (node n){
-  slow = &n;
-  fast = &n;
+  node* slow = &n;
+  node* fast = &n;
   stack<int> stack;
   while (fast!=nullptr){
     fast = fast->next->next;
@@ -209,28 +209,35 @@ bool isPalindrome (node n){
   return true;
 }
 
+
+node vectorToList (vector<int> data){
+  node headnode = node(data[0]);
+  for (int i = 1; i<data.size(); ++i){
+    headnode.appendNode(data[i]);
+  }
+  return headnode;
+}
+
 int main(){
 
   //create a linked list using the node class for testing algs
-  node node1 = node(1);
-  int a[] = {2,3,3,4,5,6,7,3};
-  for (int i = 0;i< sizeof(a)/sizeof(a[0]); i++){
-    node1.appendNode(a[i]);
-  }
+  vector<int> a {2,3,3,4,5,6,7,3};
+  node node1 = vectorToList(a);
 
 
   //testing algs
+
+  //remove duplicates testing
   node1.printList();
   removeDuplictes(node1);
   cout<<"Below is the list with duplicates removed"<<endl;
   node1.printList();
   cout<<"2nd ot last element is "<<kthElement(2,node1)<<endl;
 
-  node nodeAddition = node(7);
-  int a1[] = {1,6,5,9,2};
-  for (int i = 0;i< sizeof(a)/sizeof(a1[0]); i++){
-    nodeAddition.appendNode(a1[i]);
-  }
+
+//magicAddition alg testing
+  vector <int> a1 {1,6,5,9,2};
+  node nodeAddition = vectorToList(a1);
   node answer = magicAddition(nodeAddition);
   cout<<"Below is the magic addition answer"<<endl;
   answer.printList();
@@ -246,6 +253,12 @@ int main(){
   if (detectLoop(node1) == startLoop){
     cout<<"The start of the loop was correctly detected in"<<endl;
   }
+
+
+  //check if a linkedList is a palidrome testing
+  vector<int> palindrome1 {1,2,3,4,3,2,1};
+  node paList = vectorToList(palindrome1);
+  paList.printList();
 
 
 
