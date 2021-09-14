@@ -18,5 +18,6 @@ linkedlistAlgs.cpp
 	(4) given a node and only a node, remove it from the list 
 	(5)You have two numbers represented by a linked list, where each node contains a single digit. The digits are stored in reverse order, such that the Ts digit is at the head of the list. Write a function that adds the two numbers and returns the sum
 	(6) Detect the starting node of a loop in a singularly linked list 
+	(7) Determining if a linked list is a palindrome 
 	
 

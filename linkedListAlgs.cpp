@@ -6,7 +6,7 @@
 #include <cstddef>
 #include <vector>
 #include <cmath>
-
+#include <stack>
 
 using namespace std;
 
@@ -185,9 +185,29 @@ node* detectLoop(node n){
     slow = slow->next;
     fast = fast->next;
   }
-  return fast;//collision is the start of the loop 
+  return fast;//collision is the start of the loop
 }
 
+
+//check to see if a linked list  is a palindrome
+bool isPalindrome (node n){
+  slow = &n;
+  fast = &n;
+  stack<int> stack;
+  while (fast!=nullptr){
+    fast = fast->next->next;
+    stack.push(slow->data);
+    slow = slow->next;
+  }
+  while (slow!=nullptr){
+    if (slow->data != stack.top()){
+      return false;
+    }
+    stack.pop();
+    slow = slow->next;
+  }
+  return true;
+}
 
 int main(){
 
