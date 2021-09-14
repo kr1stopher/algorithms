@@ -194,18 +194,23 @@ bool isPalindrome (node n){
   node* slow = &n;
   node* fast = &n;
   stack<int> stack;
-  while (fast!=nullptr){
+  while (fast!=nullptr && fast->next != nullptr){ //when the end of the list is reached (fast == nullptr odd size, fast->next == nullptr even sized list)
     fast = fast->next->next;
     stack.push(slow->data);
     slow = slow->next;
   }
+  if (fast != nullptr && fast->next == nullptr){
+    stack.push(slow->data);
+  }
   while (slow!=nullptr){
     if (slow->data != stack.top()){
+      cout<<"The list is not a palindrome"<<endl;
       return false;
     }
     stack.pop();
     slow = slow->next;
   }
+  cout<<"The list is a palindrome"<<endl;
   return true;
 }
 
@@ -259,6 +264,7 @@ int main(){
   vector<int> palindrome1 {1,2,3,4,3,2,1};
   node paList = vectorToList(palindrome1);
   paList.printList();
+  isPalindrome(paList);
 
 
 
