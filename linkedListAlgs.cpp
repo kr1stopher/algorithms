@@ -162,6 +162,33 @@ node magicAddition(node n){
 }
 
 
+//detect a loop a linked list
+//where nodes collide, they are k nodes away from the start of the loop (k is also the distance from head node to start of loop)
+//after collision, move one node to head, then move forward at same speed until colide magicAddition
+//return that node
+node* detectLoop(node n){
+  node* slow = &n;
+  node* fast = &n;
+  bool init = true;
+
+  while (fast!=slow || init == true){ //go until the pointers collide
+    slow = slow->next;
+    fast = fast->next->next;
+    init = false;
+  }
+  if (slow == nullptr || fast == nullptr){ //if there was not a loop in the list return nullptr
+    return nullptr;
+  }
+
+  slow = &n; //set slow back to the starting point
+  while (fast!=slow){ //go until they collide again, but at the same speed.
+    slow = slow->next;
+    fast = fast->next;
+  }
+  return fast;//collision is the start of the loop 
+}
+
+
 int main(){
 
   //create a linked list using the node class for testing algs
@@ -187,6 +214,20 @@ int main(){
   node answer = magicAddition(nodeAddition);
   cout<<"Below is the magic addition answer"<<endl;
   answer.printList();
+
+  //create a loop in node1's linked list
+  node* pointer =  node1.next;
+  node* startLoop = pointer->next->next->next;
+  while (pointer->next != nullptr){
+    pointer = pointer->next;
+    }
+  pointer->next = startLoop;
+  //test to see if detectLoop finds the correct starting point
+  if (detectLoop(node1) == startLoop){
+    cout<<"The start of the loop was correctly detected in"<<endl;
+  }
+
+
 
 
 }
