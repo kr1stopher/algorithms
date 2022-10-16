@@ -87,7 +87,8 @@ class rectangle: public shape{
             cout<<endl<<"The area of the rectangle is: "<<width*height<<endl;
         }
         rectangle operator+(const rectangle& b) {
-            return this->area() + b->area();
+            rectangle rect(this->width + b.width, this->height + b.height); 
+            return rect;
         }
 };
 
@@ -100,8 +101,22 @@ class triangle: public shape{
 };
 
 //remove the area of the triangle from the rectangle (if rect>tri)
-void sub_triangle
 
+
+//ptr practice problems 
+void user_int (){
+    shared_ptr<int> ptr_a = make_shared<int>();
+    shared_ptr<int> ptr_b = make_shared<int>();
+    cout<<"enter two integers"<<endl;
+    cin>>*ptr_a;
+    cin>>*ptr_b; 
+
+    cout<<"The value of ptr_a is "<<*ptr_a<<endl;
+    cout<<"The value of ptr_b is "<<*ptr_b<<endl;
+
+
+
+}
 
 
 int main() {
@@ -126,6 +141,11 @@ int main() {
     rect->area();
     tri->area();
 
+    unique_ptr<rectangle> newRect =make_unique<rectangle>();
+    *newRect = *rect + *rect;
+    newRect->area();
+
+    user_int();
 
 
     return 0;
