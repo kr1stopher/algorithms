@@ -160,6 +160,18 @@ int find_odd(int input[], int size){
     return -1;
 }
 
+
+int findodd1(vector<int> arr) {
+	int number = 0;
+    cout<<0<<endl;
+	for( auto a: arr) {
+		number = number ^ a;
+        cout<<number<<endl;
+	}
+	return number;
+}
+
+
 void test_vector(){
     vector<int> vec;
     for (int i =0;i<8;i++){
@@ -311,6 +323,38 @@ int billCount1(vector<int> avail_bills, int total){
 }
 
 
+string reverse_code(string input){
+    int index = 0;
+    string output = "";
+    int multiple;
+    char myChar;
+    for (auto i: input){
+        if (index == 1){
+            multiple = i - '0';
+            string s(multiple, myChar);
+            output += s;
+        }
+        if (index == 0){
+            myChar = i;
+        }
+        index = abs(index-1);
+    }
+    return output;
+}
+
+
+//improved version 
+string reverse_code2(string input){
+    string output;
+    for (int i=0; i<input.length(); i+=2){
+        string s(input[i+1]-'0', input[i]);
+        output += s;
+    }
+    return output;
+}
+
+
+
 int main() {
 
     /*
@@ -370,12 +414,12 @@ int main() {
    cout<<"The min # of bills is "<<billCount(test, money)<<endl;
    cout<<"The min # of bills is "<<billCount1(test, money)<<endl;
 
-    string myString = "testing123"; 
-    for (auto i:myString){
-        cout<<i<<endl;
-    }
+    string test_string = "A4B5C2";
+    cout<<reverse_code(test_string)<<endl;
+    cout<<reverse_code2(test_string)<<endl;
 
-
+    vector<int> testMe = {0,0,1,1,2,2,2,3,3};
+    cout<<findodd1(testMe)<<endl;
 
     return 0;
 
