@@ -271,12 +271,44 @@ bool same_letter(string one, string two){
     return isSame;
 }
 
-class shape{
-    protected:
-        int width; height
 
-};
 
+/*
+Create a function billCount that takes two arguments. The first argument is the amount of money the user has and the second is the array of money bills available. Return the minimum count of money bills required to equal the user money amount.
+*/
+
+int billCount (vector<int> avail_bills, int total){
+    int total_bills = 0;
+    int test_total = 0; 
+
+    while (test_total != total && avail_bills.size() > 0){
+        int largest = *max_element(avail_bills.begin(), avail_bills.end());
+        while (test_total+largest <= total){
+            test_total+=largest;
+            total_bills++;
+        }
+        avail_bills.erase(max_element(avail_bills.begin(), avail_bills.end()));
+    }
+
+    if (test_total == total){
+        return total_bills;
+    } else {
+        return -1;
+    }
+}
+
+int billCount1(vector<int> avail_bills, int total){
+    int count = 0;
+    sort(avail_bills.begin(), avail_bills.end(), ::greater<int>());
+    for (auto i:avail_bills){
+        count += total/i;
+        total -= (total/i)*i; 
+        if (total == 0){break;}
+    }
+    if (total == 0){
+        return count;
+    }else {return -1;}
+}
 
 
 int main() {
@@ -311,6 +343,8 @@ int main() {
     */
 
    //shift_string();
+
+   /*no longer testing this section
    int test[11] = {0,0,1,1,2,2,3,4,4,5,5};
    cout<<(sizeof(test)/sizeof(test[0]))<<endl;
    find_odd(test, (sizeof(test)/sizeof(test[0])));
@@ -326,10 +360,23 @@ int main() {
 
     int * ptr;
     int i;
-    ptr &i;
-
-
+    ptr = &i;
     cout<<same_letter("aaaacccadd", "bbbbaaabee")<<endl;
+
+    */
+
+   vector<int> test = {1,10,20,100};
+   int money = 1001;
+   cout<<"The min # of bills is "<<billCount(test, money)<<endl;
+   cout<<"The min # of bills is "<<billCount1(test, money)<<endl;
+
+    string myString = "testing123"; 
+    for (auto i:myString){
+        cout<<i<<endl;
+    }
+
+
+
     return 0;
 
 }
