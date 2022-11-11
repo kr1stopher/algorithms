@@ -353,6 +353,15 @@ string reverse_code2(string input){
     return output;
 }
 
+//returns # of proper fractions available for given denominator d
+int proper (int d){
+    int count = 0; 
+    for (int i =1; i<d; i++){
+        if (__gcd(i,d)==1){count++;} 
+    }
+    return count;
+}
+
 
 
 int main() {
@@ -420,6 +429,15 @@ int main() {
 
     vector<int> testMe = {0,0,1,1,2,2,2,3,3};
     cout<<findodd1(testMe)<<endl;
+
+
+    cout<<"Testing bitwise operators"<<endl;
+    cout<<(~35)<<endl;
+
+    vector<int> testFraction = {1,2,5,25};
+    for (auto i:testFraction){
+        cout<<i<<": "<<proper(i)<<endl;
+    }
 
     return 0;
 
