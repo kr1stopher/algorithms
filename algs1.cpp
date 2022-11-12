@@ -362,6 +362,50 @@ int proper (int d){
     return count;
 }
 
+//take a vector and find two items such that x*y = n in n time 
+vector<int> twoProduct(vector<int> input, int n){
+    if (input.size()<2){return {0,0};};
+    vector<int> seen;
+    vector<int> output;
+    if (n == 0){
+        vector<int>::iterator it = find(input.begin(), input.end(), 0); 
+        if (it == input.begin()){
+            return {*it, *++it};
+        }else if (it == input.end()){
+            return {0,0};
+        }else {
+            return {*--it, *it};
+        }
+        
+    }
+    for (auto i:input){
+        if (i != 0 && n!=0 && *find(input.begin(), input.end(), n/i)*i == n){
+            return {i, n/i};
+        }
+        seen.push_back(i); 
+    }
+
+    output.push_back(0); 
+    output.push_back(0); 
+    return output;
+}
+
+
+
+//same letter
+bool samePattern (string input1, string input2){
+    if (input1.length() != input2.length()){
+        return false;
+    }
+    cout<<input1.length();
+    for (int i =0; i<input1.length(); i++){
+        if (input1.find(input1[i]) != input2.find(input2[i])) {
+            return false;
+        }
+    }
+    return true;
+}
+
 
 
 int main() {
@@ -437,6 +481,22 @@ int main() {
     vector<int> testFraction = {1,2,5,25};
     for (auto i:testFraction){
         cout<<i<<": "<<proper(i)<<endl;
+    }
+
+    vector<int> test2 = {0, 2, 3, 9, 13, 5};
+    int result = 0;
+    cout<<"Test two product"<<endl;
+    vector<int> output = twoProduct(test2, result);
+    for (auto i: output){
+        cout<<i<<endl;
+    }
+
+
+    string testString = "ABAB";
+    string testString1 = "CACA";
+
+    if (samePattern(testString, testString1)){
+        cout<<"The strings are the same"<<endl;
     }
 
     return 0;
