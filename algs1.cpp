@@ -406,7 +406,31 @@ bool samePattern (string input1, string input2){
     return true;
 }
 
+//check to see if a given word nest is valid 
+bool wordNest (string baseWord, string wordNest){
+    //find the base word in the center
+    while (wordNest.find(baseWord) < wordNest.length()){
+        auto index = wordNest.find(baseWord);
+        wordNest = wordNest.substr(0, index) + wordNest.substr(index + baseWord.length(), wordNest.length());
+        cout<<wordNest<<endl;
+    }
+    if (wordNest.length() == 0){
+        return true;
+    }
+    return false;
+}
 
+ int gapful(int input) {
+    string new_input = to_string(input);
+    string new_input2 = to_string(new_input[0]);
+    cout<<"new_input[0]"<<new_input[0]<<endl;
+    string new_input3 = to_string(new_input[new_input.length()-1]);//+new_input[new_input.length()-1];
+    new_input = new_input2+new_input3;
+    //new_input += new_input[new_input.length()-1];
+    cout<<"newInput2: "<<new_input2<<"newInput3: "<<new_input3<<endl;
+    cout<<"new input: "<<new_input<<endl;
+    return input;
+ }
 
 int main() {
 
@@ -499,6 +523,12 @@ int main() {
         cout<<"The strings are the same"<<endl;
     }
 
+    
+    string base = "incredible";
+    string nest = "increinincrincredibleediblecredibledible";
+    cout<<wordNest(base, nest)<<endl;
+
+    cout<<"gapful"<<gapful(100);
     return 0;
 
 }
