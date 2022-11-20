@@ -432,6 +432,23 @@ bool wordNest (string baseWord, string wordNest){
     return input;
  }
 
+
+ vector<string> nDays(vector<string> days, int n){
+    vector<string> allDays = {"monday", "tuesday", "wednesday", "thursday", "friday" ,"saturday", "sunday"};
+    vector<string> output;
+    for (auto i:days){
+        vector<string>::iterator it = find(allDays.begin(), allDays.end(), i);
+        int k = n; 
+        while (k>0){
+            it++; 
+            if (it == allDays.end()){it = allDays.begin();}
+            k--;
+        }
+        output.push_back(*it); 
+    }
+    return output;
+ }
+
 int main() {
 
     /*
@@ -529,6 +546,15 @@ int main() {
     cout<<wordNest(base, nest)<<endl;
 
     cout<<"gapful"<<gapful(100);
+
+
+
+    vector<string> nDaysTest = {"thursday", "monday"}; 
+    vector<string> outputN = nDays(nDaysTest, 4); 
+    cout<<endl<<"testing ndays"<<endl;
+    for (auto i: outputN){
+         cout<<i<<endl;
+    }
     return 0;
 
 }
