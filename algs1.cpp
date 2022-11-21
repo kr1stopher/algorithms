@@ -439,12 +439,34 @@ bool wordNest (string baseWord, string wordNest){
     for (auto i:days){
         vector<string>::iterator it = find(allDays.begin(), allDays.end(), i);
         int k = n; 
+        //n, week = 7
+        //
+        int index = it - allDays.begin(); 
+        index = (index + n) % 7;
+        /*
         while (k>0){
             it++; 
             if (it == allDays.end()){it = allDays.begin();}
             k--;
         }
-        output.push_back(*it); 
+        output.push_back(*it);
+        */
+       output.push_back(allDays[index]);
+    }
+    return output;
+ }
+
+ vector<string> scramble(vector<string> words, string mask){
+    vector<string> output;
+    for (auto i : words){
+        bool isMask = true;
+        int j =0;
+        if (i.length() != mask.length()){isMask = false;}
+        while (j<i.length() && isMask == true){
+            if (mask[j] != '*' && mask[j] != i[j]){isMask==false;}
+            j++;
+        }
+        if (isMask == true){output.push_back(i);}
     }
     return output;
  }
@@ -456,7 +478,7 @@ int main() {
     unique_ptr<int> myptr = make_unique<int>();
     *myptr = 9;
     myFunc(move(myptr));
-    unique_ptr<int> myptr2 = make_unique<int>();
+    unique_ptr<int> myptr2 = make_uique<int>();
     *myptr2 = 9;
     myFunc2(myptr2);
     cout<<endl<<*myptr2<<" in main"<<endl;
@@ -487,7 +509,8 @@ int main() {
    cout<<(sizeof(test)/sizeof(test[0]))<<endl;
    find_odd(test, (sizeof(test)/sizeof(test[0])));
    test_vector();
-   make_box(8);
+   make_box(8);     {"red”, “dee”, “cede”, “reed”, “creed”, “decree"};
+
 
     collatz(5);
     int myPrison[7] = {1, 1, 0, 0, 0, 1, 0};
@@ -549,12 +572,22 @@ int main() {
 
 
 
-    vector<string> nDaysTest = {"thursday", "monday"}; 
-    vector<string> outputN = nDays(nDaysTest, 4); 
+    vector<string> nDaysTest = {"monday", "tuesday", "friday"}; 
+    vector<string> outputN = nDays(nDaysTest, 1); 
     cout<<endl<<"testing ndays"<<endl;
     for (auto i: outputN){
          cout<<i<<endl;
     }
+
+
+    vector<string> testScrambled ={"red", "dee", "cede", "reed", "creed", "decree"};
+    string mask = "***";
+    vector<string> outputScrambled = scramble(testScrambled, mask); 
+    for (auto i:outputScrambled){
+        cout<<i<<endl;
+    }
+
+
     return 0;
 
 }
