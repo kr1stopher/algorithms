@@ -471,6 +471,37 @@ bool wordNest (string baseWord, string wordNest){
     return output;
  }
 
+
+bool winRound(vector<int> mine, vector<int> theirs){
+    sort(mine.begin(), mine.end(), greater<int>());
+    sort(theirs.begin(), theirs.end(), greater<int>());
+
+    if ((mine[0]*10+mine[1])-(theirs[0]*10+theirs[1])>0){
+        return true;
+    } else {
+        return false;
+    }
+
+
+
+    if (mine[0]>theirs[0]){
+        return true;
+    } else if (mine[0] == theirs[0] && mine[1]>theirs[1]){
+        return true;
+    } else{
+        return false;
+    }
+
+    return false;
+}
+
+
+
+
+
+
+
+
 int main() {
 
     /*
@@ -586,6 +617,11 @@ int main() {
     for (auto i:outputScrambled){
         cout<<i<<endl;
     }
+
+    vector<int> mine = {0,1,2,3,4,9};
+    vector<int> theirs = {4,5,6,7};
+
+    cout<<winRound(mine, theirs)<<endl;;
 
 
     return 0;
