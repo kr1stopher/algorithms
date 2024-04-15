@@ -21,3 +21,5 @@ linkedlistAlgs.cpp
 	(7) Determining if a linked list is a palindrome 
 	
 
+algs3.cpp
+	(1) determine if a sudoko puzzle is valid
